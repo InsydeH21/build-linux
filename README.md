@@ -1,36 +1,19 @@
-Build yourself a Linux
+自制 Linux 系统（Chinese Translation）
 ======================
 
-Introduction
+简介
 ------------
 
-*This started out as a personal project to build a very small Linux based
-operating system that has very few moving parts but is still very complete and
-useful. Along the way of figuring out how to get the damn thing to boot and
-making it do something useful I learned quite a lot. Too much time has been
-spent reading very old and hard to find documentation. Or when there was none,
-the source code of how other people were doing it. So I thought, why not share
-what I have learned.*
+*起初，我打算自己建造一个紧凑但完整并且十分有用的 Linux 系统。在搞清楚如何让这破玩意启动并且让它做点有用的事的过程中，我学到了很多。找又老又难懂的资料花费了我大量时间。经过大量努力，弄好之后，我就在想：为什么不把我学习的过程以及有用的知识分享给大家呢？*
 
-[This git repo](https://github.com/MichielDerhaeg/build-linux) contains a
-Makefile and scripts that automate everything that will be explained in this
-document. But it doesn't necessarily do everything in the same order as it's
-explained. You can also use that as reference if you'd like.
+[这个Git仓库](https://github.com/InsydeH20/build-linux) 包含一个 Makefile 和一个包含了我将要讲述的所有内容的全自动脚本。但这些东西的用处不是很大，因为我接下来会详细讲述它们是如何工作的。
 
-The Linux Kernel
+Linux 内核
 ----------------
+内核是操作系统的核心。它管理进程并与硬件“对话”。你可以从 [kernel.org](https://www.kernel.org/) 取得内核的源代码。内核有许多版本，从稳定性和新功能的角度上做取舍才能找到适合你的内核版本。在这里 [Releases](https://www.kernel.org/category/releases.html) 你可以查看每个版本受到多长时间的支持。
+你可以很安全地更新内核，不用担心太多。
 
-The kernel is the core component of our operating system. It manages the
-processes and talks to the hardware on our behalf. You can retrieve a copy of
-the source code easily from [kernel.org](https://www.kernel.org/). There are
-multiple versions to choose from, choosing one is usually a tradeoff between
-stability and wanting newer features. If you look at the
-[Releases](https://www.kernel.org/category/releases.html) tab, you can see how
-long each version will be supported and keeps receiving updates. So you can
-usually just apply the update or use the updated version without changing
-anything else or having something break.
-
-So just pick a version and download the tar.xz file and extract it with ``tar
+选一个版本，下载然后解压它。 ``tar
 -xf linux-version.tar.xz``. To build the kernel we obviously need a compiler and
 some build tools. Installing ``build-essential`` on Ubuntu (or ``base-devel`` on
 Arch Linux) will almost give you everything you need. You'll also need to
