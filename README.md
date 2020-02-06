@@ -1,4 +1,4 @@
-自制 Linux 系统（Chinese Translation）
+自制 Linux 系统（Simp Chinese Translation）
 ======================
 
 简介
@@ -13,26 +13,9 @@ Linux 内核
 内核是操作系统的核心。它管理进程并与硬件“对话”。你可以从 [kernel.org](https://www.kernel.org/) 取得内核的源代码。内核有许多版本，从稳定性和新功能的角度上做取舍才能找到适合你的内核版本。在这里 [Releases](https://www.kernel.org/category/releases.html) 你可以查看每个版本受到多长时间的支持。
 你可以很安全地更新内核，不用担心太多。
 
-选一个版本，下载然后解压它。 ``tar
--xf linux-version.tar.xz``. To build the kernel we obviously need a compiler and
-some build tools. Installing ``build-essential`` on Ubuntu (or ``base-devel`` on
-Arch Linux) will almost give you everything you need. You'll also need to
-install ``bc`` for some reason.
-
-The next step is configuring your build, inside the untarred directory you do
-``make defconfig``. This will generate a default config for your current cpu
-architecture and put it in ``.config``. You can edit it directly with a text
-editor but it's much better to do it with an interface by doing ``make nconfig``
-(this needs ``libncurses5-dev`` on Ubuntu) because it also deals with
-dependencies of enabled features. Here you can enable/disable features
-and device drivers with the spacebar. ``*`` means that it will be compiled in
-your kernel image. ``M`` means it will be compiled inside a separate kernel
-module. This is a part of the kernel that will be put in a separate file and can
-be loaded in or out dynamically in the kernel when they are required. The default
-config will do just fine for basic stuff like running in a virtual machine. But
-in our case, we don't really want to deal with kernel modules so we'll just do
-this: ``sed "s/=m/=y/" -i .config``. And we're done, so we can simply do ``make`` to
-build our kernel. Don't forget to add ``-jN`` with `N` the number of cores
+选一个版本，下载然后解压它 ``tar
+-xf linux-version.tar.xz`` 。要构建内核我们当然需要一个编译器以及一些编译工具。在 Ubuntu 上安装 ``build-essential`` (在 Arch Linux 上是 ``base-devel`` ) 可以获得几乎所有所需的软件。由于一些原因，你还需要安装 ``bc`` 。
+下一步是调试构建。在解压好的目录里运行 ``make defconfig`` 。这会基于你现在的 CPU 架构创建一份默认的配置文件，并将其存储为 ``.config`` 。你可以直接使用文本编辑器编辑此文件，但使用带有图形化界面的 ``make nconfig`` 去调试是一个更好的选择，(在 Ubuntu 上需要 ``libncurses5-dev`` ) 因为它可以负责被开启的功能的依赖。你可以使用空格键打开和关闭特性和设备驱动。后面带 ``*`` 的意味着他将被构建到你的内核镜像内。 后面带 ``M`` 的意味着它将会被构建到一个单独的内核模组内。内核模组是内核的一部分并且内核会根据所需加载它们。如果你仅仅是在虚拟机里运行一些很基础的东西，使用默认配置文件构建内核可以使它正常工作。但是我们这次并不想弄内核模组，所以运行 ``sed "s/=m/=y/" -i .config``。然后就好了，运行 ``make`` 即可编译内核。Don't forget to add ``-jN`` with `N` the number of cores
 because this might take a while. When it's done, it should tell you where your
 finished kernel is placed. This is usually ``arch/x86/boot/bzImage`` in the
 linux source directory for Intel computers.
